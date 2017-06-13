@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(uri));
         intent.putExtra("sms_body", mess.getText().toString());
         startActivity(intent);
+    }
+
+    public void EnvoyerSMS(EditText tel, EditText mess)
+    {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(tel.toString(), null, mess.toString(), null , null);
     }
 
     @Override
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick(View view) {
                 Envoyer(telephone, message);
+                //EnvoyerSMS(telephone,message);
             }
 
         });
